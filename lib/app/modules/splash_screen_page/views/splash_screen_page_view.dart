@@ -10,17 +10,16 @@ class SplashScreenPageView extends GetView<SplashScreenPageController> {
   const SplashScreenPageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 3), (() {
-      Get.offAllNamed(Routes.HOME);
+    Future.delayed(Duration(seconds: 2), (() {
+      Get.offAllNamed(Routes.ONBOARDING_PAGE);
     }));
     return Scaffold(
       backgroundColor: whiteColor,
       body: Center(
-        child: Image.asset(
-          'assets/images/logo/main_logo.png',
-          scale: 2,
-        ),
-      ),
+          child: Image.asset(
+        'assets/images/logo/main_logo.png',
+        scale: 2,
+      )),
     );
   }
 }
