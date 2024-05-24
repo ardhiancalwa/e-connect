@@ -7,9 +7,20 @@ import '../../modules/detail_vehicle/controllers/detail_vehicle_controller.dart'
 import '../themes/color.dart';
 
 class Card_Car extends StatelessWidget {
-  const Card_Car({
-    super.key,
+  String image;
+  String title;
+  String model;
+  String cost;
+  String range;
+
+  Card_Car({
+    required this.image,
+    required this.title,
+    required this.model,
+    required this.cost,
+    required this.range,
     required this.controller,
+    super.key,
   });
 
   final DetailVehicleController controller;
@@ -22,13 +33,11 @@ class Card_Car extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(
-                0.2), // Adjust color and opacity as needed
+            color: Colors.grey
+                .withOpacity(0.2), // Adjust color and opacity as needed
             blurRadius: 10.0, // Adjust blur radius for softness
-            spreadRadius:
-                0.0, // Adjust spread radius for shadow size
-            offset: Offset(
-                0.0, 4.0), // Adjust offset for shadow direction
+            spreadRadius: 0.0, // Adjust spread radius for shadow size
+            offset: Offset(0.0, 4.0), // Adjust offset for shadow direction
           ),
         ],
         borderRadius: BorderRadius.circular(
@@ -55,7 +64,7 @@ class Card_Car extends StatelessWidget {
                         ),
                         image: DecorationImage(
                           image: AssetImage(
-                            'assets/images/items/heading_car.png',
+                            'assets/images/items/$image.png',
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -65,11 +74,10 @@ class Card_Car extends StatelessWidget {
                       width: 10,
                     ),
                     Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Tesla Type X',
+                          title,
                           style: GoogleFonts.poppins(
                             color: blackColor,
                             fontSize: 14,
@@ -85,7 +93,7 @@ class Card_Car extends StatelessWidget {
                             ),
                             children: [
                               TextSpan(
-                                text: 'Electric Car',
+                                text: model,
                                 style: TextStyle(
                                   color: greyColor,
                                   fontSize: 12,
@@ -102,8 +110,7 @@ class Card_Car extends StatelessWidget {
                     Obx(
                       () => CupertinoSwitch(
                         value: controller.light,
-                        onChanged: (bool value) =>
-                            controller.toggleLight(),
+                        onChanged: (bool value) => controller.toggleLight(),
                       ),
                     ),
                   ],
@@ -133,8 +140,7 @@ class Card_Car extends StatelessWidget {
                       width: 10,
                     ),
                     Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Cost Charge',
@@ -143,10 +149,9 @@ class Card_Car extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '70.000 IDR',
+                          '$cost IDR',
                           style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
+                              fontSize: 14, fontWeight: FontWeight.w600),
                         ),
                       ],
                     )
@@ -165,8 +170,7 @@ class Card_Car extends StatelessWidget {
                       width: 10,
                     ),
                     Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Range',
@@ -175,10 +179,9 @@ class Card_Car extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '312 KM',
+                          '$range KM',
                           style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
+                              fontSize: 14, fontWeight: FontWeight.w600),
                         ),
                       ],
                     )

@@ -54,7 +54,14 @@ class DetailVehicleView extends GetView<DetailVehicleController> {
                   SizedBox(
                     height: 62,
                   ),
-                  Card_Car(controller: controller),
+                  Card_Car(
+                    controller: controller,
+                    image: 'heading_car',
+                    cost: '70.000',
+                    model: 'Electric Car',
+                    range: '312',
+                    title: 'Tesla Type X',
+                  ),
                   SizedBox(
                     height: 15,
                   ),

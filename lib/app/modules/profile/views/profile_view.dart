@@ -73,25 +73,44 @@ class ProfileView extends GetView<ProfileController> {
                 SizedBox(
                   height: 22,
                 ),
-                Text(
-                  'Fernando',
-                  style: GoogleFonts.poppins(
-                    color: blackColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  'fernando@gmail.com',
-                  style: GoogleFonts.poppins(
-                    color: blackColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                FutureBuilder(
+                    future: authC.getData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text("${snapshot.error}");
+                      } else if (snapshot.hasData) {
+                        Map<String, dynamic>? user = snapshot.data!.data();
+                        return Column(
+                          children: [
+                            Text(
+                              user!['fullname'],
+                              style: GoogleFonts.poppins(
+                                color: blackColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              user!['email'],
+                              style: GoogleFonts.poppins(
+                                color: blackColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Text('No Data');
+                      }
+                    }),
                 SizedBox(
                   height: 14,
                 ),
