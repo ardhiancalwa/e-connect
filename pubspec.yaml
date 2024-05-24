@@ -6,7 +6,10 @@ environment:
   sdk: ">=3.3.2 <4.0.0"
 
 dependencies:
+  cloud_firestore: ^4.17.4
   cupertino_icons: ^1.0.6
+  firebase_auth: ^4.19.6
+  firebase_core: ^2.31.1
   flutter:
     sdk: flutter
   get: 4.6.6
@@ -23,3 +26,4 @@ flutter:
   assets:
     - assets/images/logo/
     - assets/images/items/
+    - assets/images/icons/

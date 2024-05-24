@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../auth/auth_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../../../shared/themes/color.dart';
 import '../controllers/register_page_controller.dart';
 
 class RegisterPageView extends GetView<RegisterPageController> {
-  TextEditingController fullnameC = TextEditingController();
-  TextEditingController emailC = TextEditingController();
-  TextEditingController passC = TextEditingController();
+  final authC = Get.find<AuthController>();
+
   RegisterPageView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                 ),
                 TextField(
                   cursorColor: primaryColor,
-                  controller: emailC,
+                  controller: controller.fullnameC,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -103,7 +103,7 @@ class RegisterPageView extends GetView<RegisterPageController> {
                 ),
                 TextField(
                   cursorColor: primaryColor,
-                  controller: emailC,
+                  controller: controller.emailC,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -139,8 +139,47 @@ class RegisterPageView extends GetView<RegisterPageController> {
                   height: 8,
                 ),
                 TextField(
+                  obscureText: true,
                   cursorColor: primaryColor,
-                  controller: passC,
+                  controller: controller.passC,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                    hintText: 'Your password',
+                    hintStyle: GoogleFonts.poppins(
+                        color: greyColor,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 14),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: greyColor,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                Text(
+                  'Confirm Password',
+                  style: GoogleFonts.poppins(
+                    color: primaryColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  obscureText: true,
+                  cursorColor: primaryColor,
+                  controller: controller.confirmPassC,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -174,15 +213,13 @@ class RegisterPageView extends GetView<RegisterPageController> {
                         ),
                         padding: EdgeInsets.symmetric(vertical: 15)),
                     onPressed: () {
-                      if (emailC.text.isEmpty || passC.text.isEmpty) {
-                        Get.snackbar(
-                          "Error",
-                          "Please enter both email and password",
-                          backgroundColor: Colors.red,
-                          colorText: Colors.white,
-                          duration: Duration(seconds: 2),
+                      if (controller.passC.value ==
+                          controller.confirmPassC.value) {
+                        authC.register(
+                          controller.emailC.text,
+                          controller.passC.text,
+                          controller.fullnameC.text,
                         );
-                      } else {
                         Get.snackbar(
                           "Success",
                           "Register successful!, please login to your account",
@@ -190,7 +227,14 @@ class RegisterPageView extends GetView<RegisterPageController> {
                           colorText: Colors.white,
                           duration: Duration(seconds: 2),
                         );
-                        Get.offAndToNamed(Routes.LOGIN_PAGE);
+                      } else {
+                        Get.snackbar(
+                          "Error",
+                          "Please enter both email and password",
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                          duration: Duration(seconds: 2),
+                        );
                       }
                     },
                     child: Text(

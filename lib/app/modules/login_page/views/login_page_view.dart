@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../auth/auth_controller.dart';
 import '../controllers/login_page_controller.dart';
 
 class LoginPageView extends GetView<LoginPageController> {
-  TextEditingController emailC = TextEditingController();
-  TextEditingController passC = TextEditingController();
+  final authC = Get.find<AuthController>();
 
   LoginPageView({Key? key}) : super(key: key);
   @override
@@ -55,7 +55,7 @@ class LoginPageView extends GetView<LoginPageController> {
                 ),
                 TextField(
                   cursorColor: primaryColor,
-                  controller: emailC,
+                  controller: controller.emailC,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -91,8 +91,9 @@ class LoginPageView extends GetView<LoginPageController> {
                   height: 8,
                 ),
                 TextField(
+                  obscureText: true,
                   cursorColor: primaryColor,
-                  controller: passC,
+                  controller: controller.passC,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -126,24 +127,27 @@ class LoginPageView extends GetView<LoginPageController> {
                         ),
                         padding: EdgeInsets.symmetric(vertical: 15)),
                     onPressed: () {
-                      if (emailC.text.isEmpty || passC.text.isEmpty) {
-                        Get.snackbar(
-                          'Error',
-                          'Please enter your email and password',
-                          backgroundColor: Colors.red,
-                          colorText: whiteColor,
-                          duration: Duration(seconds: 2),
-                        );
-                      } else {
-                        Get.snackbar(
-                          'Success',
-                          "Login successful!",
-                          backgroundColor: primaryColor,
-                          colorText: whiteColor,
-                          duration: Duration(seconds: 2),
-                        );
-                        Get.offAndToNamed(Routes.HOME);
-                      }
+                      authC
+                          .login(controller.emailC.text, controller.passC.text)
+                          .then((signInSuccessful) {
+                        if (signInSuccessful) {
+                          Get.snackbar(
+                            'Success',
+                            "Login successful!",
+                            backgroundColor: primaryColor,
+                            colorText: whiteColor,
+                            duration: Duration(seconds: 2),
+                          );
+                        } else {
+                          Get.snackbar(
+                            'Error',
+                            "Login failed!",
+                            backgroundColor: Colors.red,
+                            colorText: whiteColor,
+                            duration: Duration(seconds: 2),
+                          );
+                        }
+                      });
                     },
                     child: Text(
                       'Login',

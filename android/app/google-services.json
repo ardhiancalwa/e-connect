@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "310296742392",
+    "project_id": "todo-app-cr-youth",
+    "storage_bucket": "todo-app-cr-youth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310296742392:android:0c0843153b153cf732ae0d",
+        "android_client_info": {
+          "package_name": "com.example.e_connect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaCbO0OrCG7SyNiyveWp0_Xh30-_1lqf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310296742392:android:e5e281361852181e32ae0d",
+        "android_client_info": {
+          "package_name": "com.example.todolist_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaCbO0OrCG7SyNiyveWp0_Xh30-_1lqf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
