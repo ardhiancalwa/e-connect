@@ -68,7 +68,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -83,7 +83,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_VEHICLE,
-      page: () =>  DetailVehicleView(),
+      page: () => DetailVehicleView(),
       binding: DetailVehicleBinding(),
     ),
   ];

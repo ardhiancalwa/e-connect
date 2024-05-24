@@ -48,11 +48,7 @@ class DetailVehicleView extends GetView<DetailVehicleController> {
                       onPressed: () {
                         Get.back();
                       },
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 21,
-                        color: blackColor,
-                      ),
+                      child: Image.asset('assets/images/icons/back.png'),
                     ),
                   ),
                   SizedBox(
